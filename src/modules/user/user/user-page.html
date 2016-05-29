@@ -1,0 +1,25 @@
+<div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h3>
+                <md-icon>chat</md-icon>
+                <span>ng-chat</span>
+            </h3>
+            <div flex></div>
+            <md-menu md-position-mode="target-right target">
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Menu">
+                    <md-icon md-menu-origin>menu</md-icon>
+                </md-button>
+                <md-menu-content width="3">
+                    <md-menu-item>
+                        <md-button ng-click="usr.logout()">
+                            <md-icon>exit_to_app</md-icon>
+                            Log out
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <div ui-view></div>
+</div>

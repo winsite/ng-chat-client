@@ -1,0 +1,31 @@
+<div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h3>
+                <md-icon>chat</md-icon>
+                <span>ng-chat</span>
+            </h3>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <h3>
+                <span>Log in</span>
+            </h3>
+        </div>
+    </md-toolbar>
+
+    <div flex layout="column" layout-align="start center">
+        <p>
+            Před použitím chatu se prosím přihlaste {{vm.msg}}
+        </p>
+        <md-button ng-click="vm.authenticate('google')">
+            <md-icon>open_in_new</md-icon>
+            Účet Google
+        </md-button>
+        <md-button ng-click="vm.authenticate('facebook')">
+            <md-icon>open_in_new</md-icon>
+            Účet Facebook
+        </md-button>
+    </div>
+</div>
