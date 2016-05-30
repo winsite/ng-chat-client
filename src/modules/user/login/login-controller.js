@@ -1,5 +1,8 @@
-module.exports = function($auth, $state) {
+module.exports = LoginController;
+
+function LoginController($auth, $state) {
     'use strict';
+    'ngInject';
 
     this.authenticate = function(provider) {
         $auth
@@ -8,4 +11,4 @@ module.exports = function($auth, $state) {
                 $state.go('user.room');
             });
     };
-};
+}

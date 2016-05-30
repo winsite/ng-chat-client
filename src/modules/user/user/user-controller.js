@@ -1,7 +1,8 @@
 module.exports = UserController;
 
-function UserController($auth, $state, $http) {
+function UserController($auth, $state, $resource) {
     'use strict';
+    'ngInject';
 
     var usr = this;
     usr.logout = logout;
@@ -10,10 +11,9 @@ function UserController($auth, $state, $http) {
 
     function activate() {
         var payload = $auth.getPayload();
-        usr.name = payload.sub;
-        $http.get('http://192.168.2.166:8008/api/users/' + payload.sub).then(function(res) {
-            usr.user = res.data;
-            console.log(usr.user);
+        var userResource = $resource('http://localhost:8008/api/users/:id');
+        userResource.get({id: payload.sub}, function(user) {
+            usr.user = user;
         });
     }
 

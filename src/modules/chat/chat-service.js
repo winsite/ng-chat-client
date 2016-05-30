@@ -1,11 +1,14 @@
 var io = require('socket.io-client');
 
-module.exports = function($interval, $auth) {
+module.exports = ChatService;
+
+function ChatService($interval, $auth) {
 	'use strict';
+	'ngInject';
 
 	var token = $auth.getToken();
 
-	var socket =  io.connect('http://192.168.2.166:3000/', {
+	var socket =  io.connect('http://localhost:3000/', {
 		query: 'token=' + token,
 		forceNew: true,
 		reconnection: true,

@@ -1,7 +1,8 @@
-var uiRouter = require('angular-ui-router');
+module.exports = appConfig;
 
-module.exports = function($urlRouterProvider) {
+function appConfig($urlRouterProvider) {
     'use strict';
+    'ngInject';
 
     $urlRouterProvider.otherwise('/room');
-};
+}

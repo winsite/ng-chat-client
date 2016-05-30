@@ -8,6 +8,10 @@ module.exports = {
 	module: {
 		loaders: [
 			{
+				test: /src.*\.js$/,
+				loader: 'ng-annotate'
+			},
+			{
 				test: /\.css$/,
 				loader: 'style!css'
 			},
