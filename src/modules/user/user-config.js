@@ -18,6 +18,8 @@ module.exports = function($stateProvider, $authProvider) {
             controller: 'userController as usr'
         });
 
+    $authProvider.baseUrl = 'http://localhost:8008/api';
+
     $authProvider.facebook({
         clientId: '256902531332527'
     });
