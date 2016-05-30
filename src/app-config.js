@@ -3,5 +3,5 @@ var uiRouter = require('angular-ui-router');
 module.exports = function($urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/room');
 };

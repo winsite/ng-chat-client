@@ -7,7 +7,7 @@ module.exports = function($stateProvider) {
     $stateProvider.state('user.room', {
         url: '/room',
         template: roomTemplate,
-        controller: function() {
+        controller: function(chatService) {
             console.log('room controller');
         }
     });

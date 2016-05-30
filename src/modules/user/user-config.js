@@ -15,10 +15,21 @@ module.exports = function($stateProvider, $authProvider) {
         .state('user', {
             abstract: true,
             template: userTemplate,
-            controller: 'userController as usr'
+            controller: 'userController as usr',
+            resolve: {
+                isAuthenticated: function($q, $auth, $timeout, $state) {
+                    if (!$auth.isAuthenticated()) {
+                        $timeout(function() {
+                            $state.go('login');
+                        });
+                        return $q.reject(new Error('Authorization error'));
+                    }
+                    return true;
+                }
+            }
         });
 
-    $authProvider.baseUrl = 'http://localhost:8008/api';
+    $authProvider.baseUrl = 'http://192.168.2.166:8008/api';
 
     $authProvider.github({
         clientId: '1a6d774f4bb5a6d1c97a'
