@@ -19,10 +19,10 @@ module.exports = function($stateProvider, $authProvider) {
         });
 
     $authProvider.facebook({
-        clientId: 'Facebook App ID'
+        clientId: '256902531332527'
     });
 
     $authProvider.google({
-        clientId: 'Google Client ID'
+        clientId: '1004489526825-32qv25037p5b6ffggb2tev7ieoru3top.apps.googleusercontent.com'
     });
 };
