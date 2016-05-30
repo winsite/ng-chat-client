@@ -20,8 +20,8 @@ module.exports = function($stateProvider, $authProvider) {
 
     $authProvider.baseUrl = 'http://localhost:8008/api';
 
-    $authProvider.facebook({
-        clientId: '256902531332527'
+    $authProvider.github({
+        clientId: '1a6d774f4bb5a6d1c97a'
     });
 
     $authProvider.google({
