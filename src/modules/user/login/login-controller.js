@@ -5,7 +5,7 @@ module.exports = function($auth, $state) {
         $auth
             .authenticate(provider)
             .then(function() {
-                $state.go('login');
+                $state.go('user.room');
             });
     };
 };
