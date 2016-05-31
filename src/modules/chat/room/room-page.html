@@ -10,14 +10,12 @@
     <div layout="column" flex>
         <md-content flex>
             <md-list>
-                <md-list-item class="md-2-line">
-                    <img ng-src="http://placeskull.com/170/170" class="md-avatar">
+                <md-list-item class="md-2-line" ng-repeat="message in vm.messages" md-auto-focus="">
+                    <img ng-src="{{message.img}}" class="md-avatar">
                     <div class="md-list-item-text">
-                        <h3>Jméno</h3>
+                        <h3>{{message.name}} <small>{{message.date|date:'dd.MM.yyyy HH:mm:ss Z'}}</small></h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
-                            Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
-                            velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                            {{message.text}}
                         </p>
                     </div>
                 </md-list-item>

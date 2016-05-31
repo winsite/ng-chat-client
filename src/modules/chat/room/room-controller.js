@@ -1,11 +1,12 @@
 module.exports = RoomController;
 
-function RoomController($scope, $log, chatService) {
+function RoomController($scope, $log, chatService, userResource) {
 	'use strict';
 	'ngInject';
 
 	var vm = this;
 	vm.send = send;
+	vm.messages = [];
 
 	activate();
 
@@ -24,7 +25,22 @@ function RoomController($scope, $log, chatService) {
 
 	function chatMessage(event, data) {
 		$log.debug('chat-message', data);
+
+		userResource.get({id: data.user}, function(user) {
+			console.log(user);
+
+			var env = {};
+			env.date = data.date;
+			env.text = data.text;
+			env.name = user.displayName;
+			env.img = user.picture;
+
+			vm.messages.push(env);
+
+			$scope.$applyAsync();
+		});
 	}
+
 
 	function destroy() {
 		chatService.disconnect();
