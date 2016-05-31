@@ -23,8 +23,8 @@ function UserController($auth, $state, userResource) {
         $state.go('login');
     }
 
-    function profile() {
-        $state.go('user.profile');
+    function profile(id) {
+        $state.go('user.profile', {id: id});
     }
 
     function room() {
