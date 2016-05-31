@@ -13,6 +13,10 @@ function UserResourceProvider() {
 	function UserResourceFactory($resource) {
 		'ngInject';
 
-		return $resource(provider.apiEndpoint + '/users/:id');
+		return $resource(provider.apiEndpoint + '/users/:id', {}, {
+			get: {
+				cache: true
+			}
+		});
 	}
 }
