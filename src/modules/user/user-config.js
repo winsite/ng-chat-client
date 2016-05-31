@@ -31,7 +31,7 @@ function userConfig($stateProvider) {
             }
         })
         .state('user.profile', {
-            url: '/profile',
+            url: '/profile/:id',
             template: profileTemplate,
             controller: 'profileController as vm'
         });
