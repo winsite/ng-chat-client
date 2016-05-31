@@ -1,4 +1,4 @@
-<div>
+<div layout="column" flex>
     <md-toolbar class="md-hue-1">
         <div class="md-toolbar-tools">
             <h3>
@@ -7,30 +7,34 @@
         </div>
     </md-toolbar>
 
-    <div layout-fill>
-        <md-list>
-            <md-list-item class="md-2-line">
-                <img ng-src="http://placeskull.com/170/170" class="md-avatar">
-                <div class="md-list-item-text">
-                    <h3>Jméno</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
-                        Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
-                        velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                    </p>
-                </div>
-            </md-list-item>
-        </md-list>
+    <div layout="column" flex>
+        <md-content flex>
+            <md-list>
+                <md-list-item class="md-2-line">
+                    <img ng-src="http://placeskull.com/170/170" class="md-avatar">
+                    <div class="md-list-item-text">
+                        <h3>Jméno</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                            Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+                            velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
 
-        <form layout="row" layout-margin>
-            <md-input-container class="no-errors-spacer" flex>
-                <label>Message</label>
-                <input ng-model="vm.text" autocomplete="off">
-            </md-input-container>
-            <md-button type="submit" ng-click="vm.send()">
-                <md-icon>send</md-icon>
-                Send
-            </md-button>
-        </form>
+        <div>
+            <form layout="row" layout-margin>
+                <md-input-container class="no-errors-spacer" flex>
+                    <label>Message</label>
+                    <input ng-model="vm.text" autocomplete="off">
+                </md-input-container>
+                <md-button type="submit" ng-click="vm.send()">
+                    <md-icon>send</md-icon>
+                    Send
+                </md-button>
+            </form>
+        </div>
     </div>
 </div>
