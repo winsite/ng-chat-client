@@ -15,7 +15,7 @@
                     <div class="md-list-item-text">
                         <h3>{{message.name}} <small>{{message.date| date: 'mediumTime' }}</small></h3>
                         <p>
-                            {{message.text}}
+                            {{message.text | removeProfanity}}
                         </p>
                     </div>
                 </md-list-item>
