@@ -10,7 +10,7 @@
     <div layout="column" flex>
         <md-content flex>
             <md-list>
-                <md-list-item class="md-2-line" ng-repeat="message in vm.messages" md-auto-focus="">
+                <md-list-item class="md-2-line" ng-repeat="message in vm.messages" app-autoscroll="$last">
                     <img ng-src="{{message.img}}" class="md-avatar">
                     <div class="md-list-item-text">
                         <h3>{{message.name}} <small>{{message.date| date: 'mediumTime' }}</small></h3>

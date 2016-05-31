@@ -8,6 +8,7 @@ var chatConfig = require('./chat-config.js');
 var chatService = require('./chat-service.js');
 var userResource = require('../user/user-resource.js');
 var roomController = require('./room/room-controller.js');
+var autoscrollDirective = require('./app-autoscroll.js');
 
 module.exports = angular
     .module('app.chat', [ngMaterial, uiRouter, satellizer, i18n])
@@ -43,4 +44,5 @@ module.exports = angular
             return input;
         };
     })
+    .directive('appAutoscroll', autoscrollDirective)
     .name;
