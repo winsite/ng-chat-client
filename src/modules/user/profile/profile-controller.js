@@ -1,6 +1,6 @@
 module.exports = ProfileController;
 
-function ProfileController($auth, userResource) {
+function ProfileController($stateParams, userResource) {
     'use strict';
     'ngInject';
 
@@ -9,10 +9,8 @@ function ProfileController($auth, userResource) {
     activate();
 
     function activate() {
-        var payload = $auth.getPayload();
-        userResource.get({id: payload.sub}, function(user) {
-            usr.user = user;
-            console.log(user);
+        userResource.get({id: $stateParams.id}, function(user) {
+            usr = user;
         });
     }
 }

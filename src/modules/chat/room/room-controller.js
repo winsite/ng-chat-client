@@ -34,6 +34,7 @@ function RoomController($scope, $log, chatService, userResource) {
 			env.text = data.text;
 			env.name = user.displayName;
 			env.img = user.picture;
+			env.userId = user._id;
 
 			vm.messages.push(env);
 
