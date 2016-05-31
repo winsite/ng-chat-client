@@ -1,6 +1,9 @@
 module.exports = autoscrollDirective;
 
 function autoscrollDirective() {
+    'use strict';
+    'ngInject';
+
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
