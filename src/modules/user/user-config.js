@@ -1,5 +1,6 @@
 var loginTemplate = require('./login/login-page.html');
 var userTemplate = require('./user/user-page.html');
+var profileTemplate = require('./profile/profile-page.html');
 
 module.exports = userConfig;
 
@@ -28,5 +29,10 @@ function userConfig($stateProvider) {
                     return true;
                 }
             }
+        })
+        .state('user.profile', {
+            url: '/profile',
+            template: profileTemplate,
+            controller: 'profileController as vm'
         });
 }

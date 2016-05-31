@@ -6,6 +6,8 @@ function UserController($auth, $state, userResource) {
 
     var usr = this;
     usr.logout = logout;
+    usr.profile = profile;
+    usr.room = room;
 
     activate();
 
@@ -19,5 +21,13 @@ function UserController($auth, $state, userResource) {
     function logout() {
         $auth.logout();
         $state.go('login');
+    }
+
+    function profile() {
+        $state.go('user.profile');
+    }
+
+    function room() {
+        $state.go('user.room');
     }
 }
