@@ -7,7 +7,7 @@
         </div>
     </md-toolbar>
 
-    <div>
+    <div layout-fill>
         <md-list>
             <md-list-item class="md-2-line">
                 <img ng-src="http://placeskull.com/170/170" class="md-avatar">
@@ -25,7 +25,7 @@
         <form layout="row" layout-margin>
             <md-input-container class="no-errors-spacer" flex>
                 <label>Message</label>
-                <input ng-model="vm.text">
+                <input ng-model="vm.text" autocomplete="off">
             </md-input-container>
             <md-button type="submit" ng-click="vm.send()">
                 <md-icon>send</md-icon>

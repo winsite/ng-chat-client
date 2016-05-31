@@ -11,9 +11,7 @@ function RoomController($scope, $log, chatService) {
 
 	$scope.$on('chat-message', chatMessage);
 
-	function chatMessage(event, data) {
-		$log.debug('chat-message', data);
-	}
+	$scope.$on('$destroy', destroy);
 
 	function activate() {
 		chatService.connect();
@@ -22,5 +20,13 @@ function RoomController($scope, $log, chatService) {
 	function send() {
 		chatService.send(vm.text);
 		vm.text = '';
+	}
+
+	function chatMessage(event, data) {
+		$log.debug('chat-message', data);
+	}
+
+	function destroy() {
+		chatService.disconnect();
 	}
 }

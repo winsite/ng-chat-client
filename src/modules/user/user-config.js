@@ -3,7 +3,7 @@ var userTemplate = require('./user/user-page.html');
 
 module.exports = userConfig;
 
-function userConfig($stateProvider, $authProvider) {
+function userConfig($stateProvider) {
     'use strict';
     'ngInject';
 
@@ -29,14 +29,4 @@ function userConfig($stateProvider, $authProvider) {
                 }
             }
         });
-
-    $authProvider.baseUrl = 'http://localhost:8008/api';
-
-    $authProvider.github({
-        clientId: '1a6d774f4bb5a6d1c97a'
-    });
-
-    $authProvider.google({
-        clientId: '1004489526825-32qv25037p5b6ffggb2tev7ieoru3top.apps.googleusercontent.com'
-    });
 }
