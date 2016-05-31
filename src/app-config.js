@@ -6,11 +6,11 @@ function appConfig($urlRouterProvider, chatServiceProvider, userResourceProvider
 
     $urlRouterProvider.otherwise('/room');
 
-    chatServiceProvider.socketEndpoint = 'http://192.168.2.166:3000';
+    chatServiceProvider.socketEndpoint = 'http://192.168.43.199:3000';
 
-    userResourceProvider.apiEndpoint = 'http://192.168.2.166:8008/api';
+    userResourceProvider.apiEndpoint = 'http://192.168.43.199:8008/api';
 
-    $authProvider.baseUrl = 'http://192.168.2.166:8008/api';
+    $authProvider.baseUrl = 'http://192.168.43.199:8008/api';
 
     $authProvider.github({
         clientId: '1a6d774f4bb5a6d1c97a'
