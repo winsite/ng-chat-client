@@ -9,18 +9,28 @@
 
     <div>
         <md-list>
-            <md-subheader class="md-no-sticky">3 line item, long paragraph (see on mobile)</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="msg in [1, 2, 3, 4]">
-                <img ng-src="https://lh4.googleusercontent.com/-9h002-rrnkg/AAAAAAAAAAI/AAAAAAAAAC0/Q8Z3kLvujXo/photo.jpg?sz=200" class="md-avatar" alt="{{todos[0].who}}" />
+            <md-list-item class="md-2-line">
+                <img ng-src="http://placeskull.com/170/170" class="md-avatar">
                 <div class="md-list-item-text">
-                    <h3>Jméno příjmení</h3>
+                    <h3>Jméno</h3>
                     <p>
-                        Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
                         Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
                         velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
                     </p>
                 </div>
             </md-list-item>
         </md-list>
+
+        <form layout="row" layout-margin>
+            <md-input-container class="no-errors-spacer" flex>
+                <label>Message</label>
+                <input ng-model="vm.text">
+            </md-input-container>
+            <md-button type="submit" ng-click="vm.send()">
+                <md-icon>send</md-icon>
+                Send
+            </md-button>
+        </form>
     </div>
 </div>

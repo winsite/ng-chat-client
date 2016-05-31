@@ -1,46 +1,57 @@
 var io = require('socket.io-client');
 
-module.exports = ChatService;
+module.exports = ChatServiceProvider;
 
-function ChatService($interval, $auth) {
+function ChatServiceProvider() {
 	'use strict';
 	'ngInject';
 
-	var token = $auth.getToken();
+	var provider = this;
 
-	var socket =  io.connect('http://localhost:3000/', {
-		query: 'token=' + token,
-		forceNew: true,
-		reconnection: true,
-		reconnectionDelay: 1000,
-		reconnectionDelayMax : 5000,
-		reconnectionAttempts: Infinity
-	});
+	provider.socketEndpoint = 'http://localhost:3000/';
 
-	socket.on('connect', function() {
-		console.log('connected');
-		$interval(function(){
-			socket.emit('date', {'date': new Date()});
-		}, 10000);
-	});
+	provider.$get = ChatServiceFactory;
 
-	socket.on('connect_failed', function(){
-		console.log('Connection Failed');
-	});
+	function ChatServiceFactory($auth, $rootScope) {
+		'ngInject';
 
-	socket.on('reconnect_failed', function(){
-		console.log('Reconnection Failed');
-	});
+		var socket;
 
-	socket.on('event', function(data){
-		console.log('event', data);
-	});
+		function connect() {
+			var token = $auth.getToken();
+			var options = {
+				query: 'token=' + token,
+				forceNew: true,
+				reconnection: true,
+				reconnectionDelay: 1000,
+				reconnectionDelayMax : 5000,
+				reconnectionAttempts: Infinity
+			};
+			socket =  io.connect(provider.socketEndpoint, options);
+			socket.on('message', function(data) {
+				$rootScope.$broadcast('chat-message', data);
+			});
+		}
 
-	socket.on('message', function(data){
-		console.log('message', data.message);
-	});
+		function send(text) {
+			if (socket) {
+				socket.emit('message', {text: text});
+			}
+		}
 
-	socket.on('disconnect', function(data){
-		console.log('disconnected');
-	});
-};
+		function disconnect() {
+			if (socket) {
+				socket.disconnect();
+				socket = null;
+			}
+		}
+
+		function ChatService() {
+			this.connect = connect;
+			this.send = send;
+			this.disconnect = disconnect;
+		}
+
+		return new ChatService();
+	}
+}

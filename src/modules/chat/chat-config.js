@@ -9,10 +9,6 @@ function chatConfig($stateProvider) {
     $stateProvider.state('user.room', {
         url: '/room',
         template: roomTemplate,
-        controller: function(chatService) {
-            'ngInject';
-
-            console.log('room controller');
-        }
+        controller: 'roomController as vm'
     });
 };
