@@ -1,65 +1,84 @@
+var rxJs = require('rx/dist/rx.all.js');
+
 module.exports = RoomController;
 
-var profileController = require('./../../user/profile/profile-controller.js');
-var profileTemplate = require('./../../user/profile/profile-page.html');
+function RoomController($scope, $log, chatService, userResource) {
+    'use strict';
+    'ngInject';
 
-function RoomController($scope, $log, $mdDialog, chatService, userResource) {
-	'use strict';
-	'ngInject';
+    var vm = this;
+    vm.send = send;
+    vm.onChange = onChange;
+    vm.messages = [];
 
-	var vm = this;
-	vm.send = send;
-	vm.showProfile = showProfile
-	vm.messages = [];
+    activate();
 
-	activate();
+    $scope.$on('chat-message', chatMessage);
 
-	$scope.$on('chat-message', chatMessage);
+    $scope.$on('$destroy', destroy);
 
-	$scope.$on('$destroy', destroy);
+    $scope.$on('writing', writing);
 
-	function activate() {
-		chatService.connect();
-	}
+    rxJs.Observable.fromEventPattern(
+        function add(h) {
+            $scope.$on('writing', h);
+        }
+    ).throttle(100)
+        .do(startTyping)
+        .debounce(2000)
+        .subscribe(stopTyping);
 
-	function send() {
-		chatService.send(vm.text);
-		vm.text = '';
-	}
+    function writing(event, data) {
 
-	function chatMessage(event, data) {
-		$log.debug('chat-message', data);
+        $log.log('writing listen event', event, data);
 
-		userResource.get({id: data.user}, function(user) {
-			console.log(user);
+    }
 
-			var env = {};
-			env.date = data.date;
-			env.text = data.text;
-			env.name = user.displayName;
-			env.img = user.picture;
-			env.userId = user._id;
+    function activate() {
+        chatService.connect();
 
-			vm.messages.push(env);
+    }
 
-			$scope.$applyAsync();
-		});
-	}
+    function send() {
+        chatService.send(vm.text);
+        vm.text = '';
+    }
 
-	function showProfile(ev, userId) {
-		$mdDialog.show({
-			locals:{userId: userId},
-			controller: profileController,
-			controllerAs: 'vm',
-			template: profileTemplate,
-			parent: angular.element(document.body),
-			targetEvent: ev,
-			clickOutsideToClose:true,
-			fullscreen: true
-		})
-	}
+    function onChange() {
+        $log.log('onChange ' + vm.text);
+        chatService.writingSend('userID');
+    }
 
-	function destroy() {
-		chatService.disconnect();
-	}
+    function chatMessage(event, data) {
+        $log.debug('chat-message', data);
+
+        userResource.get({id: data.user}, function (user) {
+            console.log(user);
+
+            var env = {};
+            env.date = data.date;
+            env.text = data.text;
+            env.name = user.displayName;
+            env.img = user.picture;
+            env.userId = user._id;
+
+            vm.messages.push(env);
+
+            $scope.$applyAsync();
+        });
+    }
+
+
+    function destroy() {
+        chatService.disconnect();
+    }
+
+    function startTyping(data) {
+        $log.log('startTyping ', data);
+    }
+
+    function stopTyping() {
+        $log.log('stopTyping');
+    }
+
 }
