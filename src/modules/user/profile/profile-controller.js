@@ -7,7 +7,7 @@ function ProfileController($stateParams, userResource) {
     var usr = this;
 
     activate();
-
+ 
     function activate() {
         userResource.get({id: $stateParams.id}, function(user) {
         	console.log(user);
