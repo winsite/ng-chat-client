@@ -32,6 +32,6 @@
     "angular-ui-router": "^0.3.0",
     "satellizer": "^0.14.0",
     "socket.io-client": "^1.4.6",
-    "rx": "4.1.0"
+    "rx": "4.1.0" 
   }
 }
