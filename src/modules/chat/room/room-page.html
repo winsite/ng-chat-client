@@ -7,34 +7,57 @@
         </div>
     </md-toolbar>
 
-    <div layout="column" flex>
-        <md-content flex>
-            <md-list>
-                <md-list-item class="md-2-line" ng-repeat="message in vm.messages" app-autoscroll="$last">
-                    <a ng-click="usr.profile(message.userId)">
-                        <img ng-src="{{message.img}}" class="md-avatar">
-                    </a>
-                    <div class="md-list-item-text">
-                        <h3>{{message.name}} <small>{{message.date| date: 'mediumTime' }}</small></h3>
-                        <p>
-                            {{message.text | removeProfanity}}
-                        </p>
-                    </div>
-                </md-list-item>
-            </md-list>
-        </md-content>
+    <div layout="row" flex>
 
-        <div>
-            <form layout="row" layout-margin>
-                <md-input-container class="no-errors-spacer" flex>
-                    <label>Message</label>
-                    <input ng-model="vm.text" autocomplete="off">
-                </md-input-container>
-                <md-button type="submit" ng-click="vm.send()">
-                    <md-icon>send</md-icon>
-                    Send
-                </md-button>
-            </form>
+        <div layout="column" flex>
+            <md-content flex>
+                <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="message in vm.messages" app-autoscroll="$last">
+                        <a ng-click="usr.profile(message.userId)">
+                            <img ng-src="{{message.img}}" class="md-avatar">
+                        </a>
+                        <div class="md-list-item-text">
+                            <h3>{{message.name}} <small>{{message.date| date: 'mediumTime' }}</small></h3>
+                            <p>
+                                {{message.text | removeProfanity}}
+                            </p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+
+            <div>
+                <form layout="row" layout-margin>
+                    <md-input-container class="no-errors-spacer" flex>
+                        <label>Message</label>
+                        <input ng-model="vm.text" autocomplete="off">
+                    </md-input-container>
+                    <md-button type="submit" ng-click="vm.send()">
+                        <md-icon>send</md-icon>
+                        Send
+                    </md-button>
+                </form>
+            </div>
         </div>
+
+        <md-sidenav class="md-sidenav-left"
+                    md-component-id="users"
+                    md-is-locked-open="$mdMedia('gt-sm')"
+                    md-disable-backdrop
+                    md-whiteframe="4">
+            <md-toolbar>
+                <h1 class="md-toolbar-tools">Online users</h1>
+            </md-toolbar>
+            <md-content flex>
+                <md-list>
+                    <md-list-item>
+                        <img ng-src="http://placeskull.com/170/170" class="md-avatar">
+                        <div class="md-list-item-text">
+                            <h3>Jméno Příjmení</h3>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
     </div>
 </div>
