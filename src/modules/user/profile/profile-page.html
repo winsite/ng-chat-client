@@ -1,13 +1,14 @@
-<div layout="column" flex>
-    <md-toolbar class="md-hue-1">
+<md-dialog aria-label="Profile" ng-cloak>
+    <md-toolbar>
         <div class="md-toolbar-tools">
-            <h3>
-                <span>#profile</span>
-            </h3>
+            <h2>Profile</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                x
+            </md-button>
         </div>
     </md-toolbar>
-
-    <div layout="column" flex>
+    <md-dialog-content>
         <div class="profile">
 
             <img ng-src="{{vm.user.picture}}" class="face">
@@ -15,5 +16,5 @@
             <div ng-if="vm.user.google">Google user</div>
             <div ng-if="vm.user.github">GitHub user</div>
         </div>
-    </div>
-</div>
+    </md-dialog-content>
+</md-dialog>

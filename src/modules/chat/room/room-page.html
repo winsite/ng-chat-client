@@ -13,7 +13,7 @@
             <md-content flex>
                 <md-list>
                     <md-list-item class="md-2-line" ng-repeat="message in vm.messages" app-autoscroll="$last">
-                        <a ng-click="usr.profile(message.userId)">
+                        <a ng-click="vm.showProfile($event, message.userId)">
                             <img ng-src="{{message.img}}" class="md-avatar">
                         </a>
                         <div class="md-list-item-text">
