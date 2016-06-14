@@ -27,15 +27,17 @@
             </md-content>
 
             <div>
-                <form layout="row" layout-margin>
+                <form name="msForm" layout="row" layout-margin no-validate>
                     <md-input-container class="no-errors-spacer" flex>
                         <label>Message</label>
-                        <input ng-model="vm.text" autocomplete="off">
+                        <input ng-model="vm.text" autocomplete="off" required >
                     </md-input-container>
-                    <md-button type="submit" ng-click="vm.send()">
+                    
+                    <md-button type="submit" ng-disabled="!msForm.$valid" ng-click="vm.send()">
                         <md-icon>send</md-icon>
                         Send
                     </md-button>
+                   
                 </form>
             </div>
         </div>

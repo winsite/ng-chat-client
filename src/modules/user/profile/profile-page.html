@@ -9,8 +9,11 @@
 
     <div layout="column" flex>
         <div class="profile">
-            <img ng-src="{{usr.user.picture}}" class="face">
-            <div class="username">{{usr.user.displayName}}</div>
+        	 
+            <img ng-src="{{vm.user.picture}}" class="face">
+            <div class="username">{{vm.user.displayName}}</div>
+            <div ng-if="vm.user.google">Google user</div>
+            <div ng-if="vm.user.github">GitHub user</div>
         </div>
     </div>
 </div>
