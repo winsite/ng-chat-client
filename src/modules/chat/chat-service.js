@@ -31,6 +31,18 @@ function ChatServiceProvider() {
 			socket.on('message', function(data) {
 				$rootScope.$broadcast('chat-message', data);
 			});
+			
+			socket.on('users', function(data){
+				$rootScope.$broadcast('chat-users', data);
+			});
+			
+			socket.on('connected', function(data){
+				$rootScope.$broadcast('chat-connected', data);
+			});
+			
+			socket.on('disconnected', function(data){
+				$rootScope.$broadcast('chat-disconnected', data);
+			})
 		}
 
 		function send(text) {

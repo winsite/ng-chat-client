@@ -52,10 +52,10 @@
             </md-toolbar>
             <md-content flex>
                 <md-list>
-                    <md-list-item>
-                        <img ng-src="http://placeskull.com/170/170" class="md-avatar">
+                    <md-list-item ng-repeat="user in vm.users">
+                        <img ng-src="{{user.img}}" class="md-avatar">
                         <div class="md-list-item-text">
-                            <h3>Jméno Příjmení</h3>
+                            <h3>{{user.name}}</h3>
                         </div>
                     </md-list-item>
                 </md-list>
