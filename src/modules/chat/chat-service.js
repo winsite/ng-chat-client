@@ -1,4 +1,5 @@
 var io = require('socket.io-client');
+var rxJs = require('rx/dist/rx.all.js');
 
 module.exports = ChatServiceProvider;
 
@@ -12,7 +13,7 @@ function ChatServiceProvider() {
 
 	provider.$get = ChatServiceFactory;
 
-	function ChatServiceFactory($auth, $rootScope) {
+	function ChatServiceFactory($auth, $rootScope, $log) {
 		'ngInject';
 
 		var socket;
@@ -31,6 +32,18 @@ function ChatServiceProvider() {
 			socket.on('message', function(data) {
 				$rootScope.$broadcast('chat-message', data);
 			});
+
+			// socket.on('writing', function(data){
+			// 	Bacon.fromEvent(socket, "sense")
+			// 		.filter(function(data) { return true })
+			// 		.forEach(function(data) { dealWith(data) })
+			// })
+
+
+			socket.on('writing', function(data) {
+				$log.log('writing on event received');
+				$rootScope.$broadcast('writing', data);
+			});
 		}
 
 		function send(text) {
@@ -46,10 +59,20 @@ function ChatServiceProvider() {
 			}
 		}
 
+		function writingSend(data) {
+			$log.log('writingSend');
+			if (socket) {
+				socket.emit('writing');
+				//, {user: data}
+			}
+		}
+
+
 		function ChatService() {
 			this.connect = connect;
 			this.send = send;
 			this.disconnect = disconnect;
+			this.writingSend = writingSend;
 		}
 
 		return new ChatService();
