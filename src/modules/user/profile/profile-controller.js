@@ -4,14 +4,14 @@ function ProfileController($stateParams, userResource) {
     'use strict';
     'ngInject';
 
-    var usr = this;
+    var vm = this;
+    vm.user = null;
 
     activate();
- 
+
     function activate() {
         userResource.get({id: $stateParams.id}, function(user) {
-        	console.log(user);
-            usr.user = user;
+            vm.user = user;
         });
     }
 }
