@@ -1,17 +1,22 @@
 module.exports = ProfileController;
 
-function ProfileController($stateParams, userResource) {
+function ProfileController($mdDialog, userResource, userId) {
     'use strict';
     'ngInject';
 
-    var usr = this;
+    var vm = this;
+    vm.user = null;
+    vm.cancel = cancel;
 
     activate();
- 
+
     function activate() {
-        userResource.get({id: $stateParams.id}, function(user) {
-        	console.log(user);
-            usr.user = user;
+        userResource.get({id: userId}, function(user) {
+            vm.user = user;
         });
+    }
+
+    function cancel() {
+        $mdDialog.cancel();
     }
 }

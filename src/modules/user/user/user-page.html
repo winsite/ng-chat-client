@@ -7,7 +7,7 @@
             </h3>
             <div flex></div>
             <div>
-                <a ng-click="usr.profile(usr.user._id)">
+                <a ng-click="usr.showProfile($event, usr.user._id)">
                     <img ng-src="{{usr.user.picture}}" class="face">
                 </a>
             </div>
@@ -17,7 +17,7 @@
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item>
-                        <md-button ng-click="usr.profile(usr.user._id)">
+                        <md-button ng-click="usr.showProfile($event, usr.user._id)">
                             <md-icon>account_box</md-icon>
                             Profile
                         </md-button>

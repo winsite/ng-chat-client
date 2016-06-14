@@ -1,11 +1,15 @@
 module.exports = RoomController;
 
-function RoomController($scope, $log, chatService, userResource) {
+var profileController = require('./../../user/profile/profile-controller.js');
+var profileTemplate = require('./../../user/profile/profile-page.html');
+
+function RoomController($scope, $log, $mdDialog, chatService, userResource) {
 	'use strict';
 	'ngInject';
 
 	var vm = this;
 	vm.send = send;
+	vm.showProfile = showProfile
 	vm.messages = [];
 
 	activate();
@@ -42,6 +46,18 @@ function RoomController($scope, $log, chatService, userResource) {
 		});
 	}
 
+	function showProfile(ev, userId) {
+		$mdDialog.show({
+			locals:{userId: userId},
+			controller: profileController,
+			controllerAs: 'vm',
+			template: profileTemplate,
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose:true,
+			fullscreen: true
+		})
+	}
 
 	function destroy() {
 		chatService.disconnect();
