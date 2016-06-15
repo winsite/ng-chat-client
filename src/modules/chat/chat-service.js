@@ -33,17 +33,21 @@ function ChatServiceProvider() {
 				$rootScope.$broadcast('chat-message', data);
 			});
 
-			// socket.on('writing', function(data){
-			// 	Bacon.fromEvent(socket, "sense")
-			// 		.filter(function(data) { return true })
-			// 		.forEach(function(data) { dealWith(data) })
-			// })
-
-
 			socket.on('writing', function(data) {
 				$log.log('writing on event received');
 				$rootScope.$broadcast('writing', data);
 			});
+
+			socket.on('users', function(data){
+							$rootScope.$broadcast('chat-users', data);
+						});
+socket.on('connected', function(data){
+				$rootScope.$broadcast('chat-connected', data);
+			});
+			
+			socket.on('disconnected', function(data){
+				$rootScope.$broadcast('chat-disconnected', data);
+			})
 		}
 
 		function send(text) {
