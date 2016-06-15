@@ -75,23 +75,21 @@ function RoomController($scope, $log, chatService, userResource) {
 		
 		vm.users = [];
 		data.forEach(function(entry){
-			if($scope.$parent.usr.profile._id != entry){
-				userResource.get({id: entry}, function(user) {
-					console.log(user);
-	
-					var env = {};
-					if(user.displayName){
-						env.name = user.displayName;
-					}else{
-						env.name = "Anonymous";
-					}
-					env.img = user.picture;
-					env.userId = user._id;
-	
-					vm.users.push(env);
-					$scope.$applyAsync();
-				});
-			}
+			userResource.get({id: entry}, function(user) {
+				console.log(user);
+
+				var env = {};
+				if(user.displayName){
+					env.name = user.displayName;
+				}else{
+					env.name = "Anonymous";
+				}
+				env.img = user.picture;
+				env.userId = user._id;
+
+				vm.users.push(env);
+				$scope.$applyAsync();
+			});
 		});
 				
 	}
@@ -99,7 +97,6 @@ function RoomController($scope, $log, chatService, userResource) {
 	function chatConnected(event, data) {
 		$log.debug('chat-connected', data);
 		userResource.get({id: data.user}, function(user) {
-			console.log(user);
 
 			var env = {};
 			env.date = data.date;
@@ -127,7 +124,7 @@ function RoomController($scope, $log, chatService, userResource) {
 			}
 			
 		});
-				
+
 	}
 
 	function onChange() {
