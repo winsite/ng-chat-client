@@ -30,7 +30,7 @@
                 <form name="msForm" layout="row" layout-margin no-validate>
                     <md-input-container class="no-errors-spacer" flex>
                         <label>Message</label>
-                        <input ng-model="vm.text" autocomplete="off" required >
+                        <input ng-model="vm.text" autocomplete="off" required ng-change="vm.onChange()">
                     </md-input-container>
                     
                     <md-button type="submit" ng-disabled="!msForm.$valid" ng-click="vm.send()">
@@ -55,7 +55,7 @@
                     <md-list-item ng-repeat="user in vm.users">
                         <img ng-src="{{user.img}}" class="md-avatar">
                         <div class="md-list-item-text">
-                            <h3>{{user.name}}</h3>
+                            <h3>{{user.name}} <small ng-show="user.typing" class="md-caption">typing...</small></h3>
                         </div>
                     </md-list-item>
                 </md-list>

@@ -1,4 +1,4 @@
-var rxJs = require('rx/dist/rx.all.js');
+
 
 module.exports = RoomController;
 
@@ -25,17 +25,12 @@ function RoomController($scope, $log, chatService, userResource) {
 
 	$scope.$on('chat-disconnected', chatDisconnected); 
 
-	$scope.$on('writing', writing);
-	
 	function activate() {
 		chatService.connect();
 	}
 
-	rxJs.Observable.fromEventPattern(
-        function add(h) {
-            $scope.$on('writing', h);
-        }
-    ).throttle(100)
+	chatService.getWritingObservable()
+		.throttle(100)
         .do(startTyping)
         .debounce(2000)
         .subscribe(stopTyping);
@@ -45,15 +40,7 @@ function RoomController($scope, $log, chatService, userResource) {
 		vm.text = '';
 	}
 
-	function writing(event, data) {
-
-        $log.log('writing listen event', event, data);
-
-    }
-
 	function chatMessage(event, data) {
-		$log.debug('chat-message', data);
-
 		userResource.get({id: data.user}, function(user) {
 			console.log(user);
 
@@ -71,8 +58,6 @@ function RoomController($scope, $log, chatService, userResource) {
 	}
 
 	function chatUsers(event, data) {
-		$log.debug('chat-users', data);
-		
 		vm.users = [];
 		data.forEach(function(entry){
 			userResource.get({id: entry}, function(user) {
@@ -91,11 +76,9 @@ function RoomController($scope, $log, chatService, userResource) {
 				$scope.$applyAsync();
 			});
 		});
-				
 	}
 	
 	function chatConnected(event, data) {
-		$log.debug('chat-connected', data);
 		userResource.get({id: data.user}, function(user) {
 
 			var env = {};
@@ -116,25 +99,19 @@ function RoomController($scope, $log, chatService, userResource) {
 	}
 	
 	function chatDisconnected(event, data) {
-		$log.debug('chat-disconnected', data);
 		vm.users.forEach(function(entry){
 			if(data.user == entry.userId){
 				vm.users.splice(vm.users.indexOf(entry),1);
 				$scope.$applyAsync();
 			}
-			
 		});
-
 	}
 
 	function onChange() {
-        $log.log('onChange ' + vm.text);
-        chatService.writingSend('userID');
+        chatService.writingSend();
     }
 
     function chatMessage(event, data) {
-        $log.debug('chat-message', data);
-
         userResource.get({id: data.user}, function (user) {
             console.log(user);
 
@@ -157,11 +134,21 @@ function RoomController($scope, $log, chatService, userResource) {
     }
 
     function startTyping(data) {
-        $log.log('startTyping ', data);
+	    vm.users.forEach(function(entry){
+		    if(data.user == entry.userId){
+			    entry.typing = true;
+			    $scope.$applyAsync();
+		    }
+	    });
     }
 
-    function stopTyping() {
-        $log.log('stopTyping');
+    function stopTyping(data) {
+	    vm.users.forEach(function(entry){
+		    if(data.user == entry.userId){
+			    entry.typing = false;
+			    $scope.$applyAsync();
+		    }
+	    });
     }
 
 	function destroy() {

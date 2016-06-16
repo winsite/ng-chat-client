@@ -13,7 +13,7 @@ function ChatServiceProvider() {
 
 	provider.$get = ChatServiceFactory;
 
-	function ChatServiceFactory($auth, $rootScope, $log) {
+	function ChatServiceFactory($auth, $rootScope) {
 		'ngInject';
 
 		var socket;
@@ -28,26 +28,28 @@ function ChatServiceProvider() {
 				reconnectionDelayMax : 5000,
 				reconnectionAttempts: Infinity
 			};
+
 			socket =  io.connect(provider.socketEndpoint, options);
+
 			socket.on('message', function(data) {
 				$rootScope.$broadcast('chat-message', data);
 			});
 
 			socket.on('writing', function(data) {
-				$log.log('writing on event received');
 				$rootScope.$broadcast('writing', data);
 			});
 
 			socket.on('users', function(data){
-							$rootScope.$broadcast('chat-users', data);
-						});
-socket.on('connected', function(data){
+				$rootScope.$broadcast('chat-users', data);
+			});
+
+			socket.on('connected', function(data){
 				$rootScope.$broadcast('chat-connected', data);
 			});
 			
 			socket.on('disconnected', function(data){
 				$rootScope.$broadcast('chat-disconnected', data);
-			})
+			});
 		}
 
 		function send(text) {
@@ -63,20 +65,22 @@ socket.on('connected', function(data){
 			}
 		}
 
-		function writingSend(data) {
-			$log.log('writingSend');
+		function writingSend() {
 			if (socket) {
 				socket.emit('writing');
-				//, {user: data}
 			}
 		}
 
+		function getWritingObservable() {
+			return rxJs.Observable.fromEvent(socket, "writing");
+		}
 
 		function ChatService() {
 			this.connect = connect;
 			this.send = send;
 			this.disconnect = disconnect;
 			this.writingSend = writingSend;
+			this.getWritingObservable = getWritingObservable;
 		}
 
 		return new ChatService();
