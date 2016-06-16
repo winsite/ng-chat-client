@@ -1,8 +1,6 @@
-
-
 module.exports = RoomController;
 
-function RoomController($scope, $log, chatService, userResource) {
+function RoomController($scope, chatService, userResource) {
     'use strict';
     'ngInject';
 

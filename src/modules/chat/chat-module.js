@@ -18,7 +18,7 @@ module.exports = angular
     .config(chatConfig)
     .filter('removeProfanity', function() {
         return function(input) {
-            var filteredWords = ['lorem', 'set', 'prdel', 'hovno', 'ahoj', 'test'];
+            var filteredWords = ['prdel', 'hovno', 'magor', 'debil'];
             var check = [];
             check = input.split(' ');
             for (var i = 0; i < check.length; i++) {

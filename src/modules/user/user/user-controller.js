@@ -9,7 +9,7 @@ function UserController($auth, $state, $mdDialog, userResource) {
 
     var usr = this;
     usr.logout = logout;
-    usr.showProfile = showProfile
+    usr.showProfile = showProfile;
     usr.room = room;
 
     activate();

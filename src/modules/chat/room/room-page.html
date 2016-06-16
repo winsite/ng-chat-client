@@ -1,11 +1,4 @@
 <div layout="column" flex>
-    <md-toolbar class="md-hue-1">
-        <div class="md-toolbar-tools">
-            <h3>
-                <span>#room</span>
-            </h3>
-        </div>
-    </md-toolbar>
 
     <div layout="row" flex>
 
@@ -13,7 +6,7 @@
             <md-content flex>
                 <md-list>
                     <md-list-item class="md-2-line" ng-repeat="message in vm.messages" app-autoscroll="$last">
-                        <a ng-click="vm.showProfile($event, message.userId)">
+                        <a ng-click="vm.showProfile($event, message.userId)" ng-controller="userController as vm">
                             <img ng-src="{{message.img}}" class="md-avatar">
                         </a>
                         <div class="md-list-item-text">
@@ -53,7 +46,9 @@
             <md-content flex>
                 <md-list>
                     <md-list-item ng-repeat="user in vm.users">
-                        <img ng-src="{{user.img}}" class="md-avatar">
+                        <a ng-click="vm.showProfile($event, user.userId)" ng-controller="userController as vm">
+                            <img ng-src="{{user.img}}" class="md-avatar">
+                        </a>
                         <div class="md-list-item-text">
                             <h3>{{user.name}} <small ng-show="user.typing" class="md-caption">typing...</small></h3>
                         </div>
